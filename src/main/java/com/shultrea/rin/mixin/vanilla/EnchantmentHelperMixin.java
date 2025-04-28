@@ -11,6 +11,8 @@ import com.shultrea.rin.enchantments.weapon.EnchantmentAdvancedKnockback;
 import com.shultrea.rin.enchantments.weapon.EnchantmentAdvancedLooting;
 import com.shultrea.rin.enchantments.weapon.EnchantmentFieryEdge;
 import com.shultrea.rin.enchantments.weapon.EnchantmentTierFA;
+import com.shultrea.rin.enchantments.weapon.damage.EnchantmentWaterAspect;
+import com.shultrea.rin.enchantments.weapon.potiondebuffer.EnchantmentCryogenic;
 import com.shultrea.rin.registry.EnchantmentRegistry;
 import com.shultrea.rin.util.compat.CompatUtil;
 import com.shultrea.rin.util.compat.RLCombatCompat;
@@ -95,7 +97,9 @@ public abstract class EnchantmentHelperMixin {
 			at = @At("RETURN")
 	)
 	private static int soManyEnchantments_vanillaEnchantmentHelper_getFireAspectModifier(int original, EntityLivingBase entity) {
-		boolean hasExtinguish = EnchantmentExtinguish.getLevelValue(entity)>0;
+		boolean hasExtinguish = EnchantmentExtinguish.getLevelValue(entity)>0
+									|| EnchantmentWaterAspect.getLevelValue(entity)>0
+									|| EnchantmentCryogenic.getLevelValue(entity)>0;
 		return hasExtinguish ? 0 : original + EnchantmentTierFA.getLevelValue(entity) + EnchantmentFieryEdge.getLevelValue(entity);
 	}
 	

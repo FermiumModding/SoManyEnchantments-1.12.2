@@ -4,6 +4,7 @@ import com.shultrea.rin.config.ConfigProvider;
 import com.shultrea.rin.config.EnchantabilityConfig;
 import com.shultrea.rin.config.ModConfig;
 import com.shultrea.rin.enchantments.base.EnchantmentBase;
+import com.shultrea.rin.registry.EnchantmentRegistry;
 import com.shultrea.rin.util.compat.CompatUtil;
 import com.shultrea.rin.util.compat.LycanitesMobsCompat;
 import com.shultrea.rin.util.compat.RLCombatCompat;
@@ -70,7 +71,15 @@ public class EnchantmentCryogenic extends EnchantmentBase {
 	public boolean isTreasureEnchantment() {
 		return ModConfig.treasure.cryogenic;
 	}
-	
+
+	public static int getLevelValue(EntityLivingBase entity) {
+		if(!EnchantmentRegistry.cryogenic.isEnabled()) return 0;
+		if(entity == null) return 0;
+		ItemStack stack = entity.getHeldItemMainhand();
+		if(CompatUtil.isRLCombatLoaded()) stack = RLCombatCompat.getFireAspectStack(entity);
+		return EnchantmentHelper.getEnchantmentLevel(EnchantmentRegistry.cryogenic, stack);
+	}
+
 	@Override
 	public void onEntityDamagedAlt(EntityLivingBase attacker, Entity target, ItemStack weapon, int level) {
 		if(!this.isEnabled()) return;

@@ -4,6 +4,7 @@ import com.shultrea.rin.config.ConfigProvider;
 import com.shultrea.rin.config.EnchantabilityConfig;
 import com.shultrea.rin.config.ModConfig;
 import com.shultrea.rin.enchantments.base.EnchantmentBase;
+import com.shultrea.rin.registry.EnchantmentRegistry;
 import com.shultrea.rin.util.compat.CompatUtil;
 import com.shultrea.rin.util.compat.RLCombatCompat;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -62,7 +63,15 @@ public class EnchantmentWaterAspect extends EnchantmentBase {
 	public boolean isTreasureEnchantment() {
 		return ModConfig.treasure.waterAspect;
 	}
-	
+
+	public static int getLevelValue(EntityLivingBase entity) {
+		if(!EnchantmentRegistry.waterAspect.isEnabled()) return 0;
+		if(entity == null) return 0;
+		ItemStack stack = entity.getHeldItemMainhand();
+		if(CompatUtil.isRLCombatLoaded()) stack = RLCombatCompat.getFireAspectStack(entity);
+		return EnchantmentHelper.getEnchantmentLevel(EnchantmentRegistry.waterAspect, stack);
+	}
+
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public void onLivingHurtEvent(LivingHurtEvent event) {
 		if(!this.isEnabled()) return;
