@@ -12,40 +12,22 @@ import java.util.Random;
 public abstract class PotionUtil {
 	
 	public static final Random RANDOM = new Random();
-	
-	public static final List<Potion> BUFF_INSTANT = new ArrayList<>();
-	public static final List<Potion> DEBUFF_INSTANT = new ArrayList<>();
-	public static final List<Potion> BUFF_NONINSTANT = new ArrayList<>();
-	public static final List<Potion> DEBUFF_NONINSTANT = new ArrayList<>();
+
+	public static final List<Potion> BUFFS = new ArrayList<>();
+	public static final List<Potion> DEBUFFS = new ArrayList<>();
 	
 	@Nullable
-	public static Potion getNonInstantNegativePotion() {
-		if(DEBUFF_NONINSTANT.isEmpty()) return null;
-		int index = RANDOM.nextInt(DEBUFF_NONINSTANT.size());
-		return DEBUFF_NONINSTANT.get(index);
+	public static Potion getNegativePotion(Random rand) {
+		if(DEBUFFS.isEmpty()) return null;
+		return DEBUFFS.get(rand.nextInt(DEBUFFS.size()));
 	}
 	
 	@Nullable
-	public static Potion getInstantNegativePotion() {
-		if(DEBUFF_INSTANT.isEmpty()) return null;
-		int index = RANDOM.nextInt(DEBUFF_INSTANT.size());
-		return DEBUFF_INSTANT.get(index);
+	public static Potion getPositivePotion(Random rand) {
+		if(BUFFS.isEmpty()) return null;
+		return BUFFS.get(rand.nextInt(BUFFS.size()));
 	}
-	
-	@Nullable
-	public static Potion getNonInstantPositivePotion() {
-		if(BUFF_NONINSTANT.isEmpty()) return null;
-		int index = RANDOM.nextInt(BUFF_NONINSTANT.size());
-		return BUFF_NONINSTANT.get(index);
-	}
-	
-	@Nullable
-	public static Potion getInstantPositivePotion() {
-		if(BUFF_INSTANT.isEmpty()) return null;
-		int index = RANDOM.nextInt(BUFF_INSTANT.size());
-		return BUFF_INSTANT.get(index);
-	}
-	
+
 	public static void initializePotionLists() {
 		List<ResourceLocation> potionBlacklist = new ArrayList<>();
 
@@ -63,12 +45,10 @@ public abstract class PotionUtil {
 
 			if(listMatch == ModConfig.miscellaneous.potionBlacklistAsWhitelist) {
 				if(potion.isBadEffect()) {
-					if(potion.isInstant()) DEBUFF_INSTANT.add(potion);
-					else DEBUFF_NONINSTANT.add(potion);
+					DEBUFFS.add(potion);
 				}
 				else {
-					if(potion.isInstant()) BUFF_INSTANT.add(potion);
-					else BUFF_NONINSTANT.add(potion);
+					BUFFS.add(potion);
 				}
 			}
 		}
