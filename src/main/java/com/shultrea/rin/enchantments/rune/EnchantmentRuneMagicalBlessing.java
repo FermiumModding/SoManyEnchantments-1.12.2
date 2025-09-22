@@ -95,7 +95,7 @@ public class EnchantmentRuneMagicalBlessing extends EnchantmentBase {
 				event.getSource().setMagicDamage();
 			}
 
-			if (attacker.getRNG().nextFloat() >= 0.06 * level) return;
+			if (attacker.getRNG().nextFloat() >= 0.05 * level) return;
 
 			int amplifier = Math.max(0, attacker.getRNG().nextInt(level) - 1);
 			Potion negaPotion = PotionUtil.getNegativePotion(attacker.getRNG());
