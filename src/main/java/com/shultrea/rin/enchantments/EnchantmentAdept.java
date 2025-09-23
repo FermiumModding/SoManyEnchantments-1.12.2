@@ -68,16 +68,13 @@ public class EnchantmentAdept extends EnchantmentBase {
 		EntityLivingBase victim = event.getEntityLiving();
 		if(victim == null) return;
 		if(event.getDroppedExperience() <= 0) return;
-		
+
 		int level = EnchantmentHelper.getMaxEnchantmentLevel(this, player);
 		if(level > 0) {
 			boolean isBoss = !victim.isNonBoss() || (CompatUtil.isScalingHealthLoaded() && ScalingHealthCompat.isEntityBlight(victim));
-			if(isBoss) {
-				event.setDroppedExperience((int)((float)event.getDroppedExperience() * (1.0F + 0.5F * (float)level)));
-			}
-			else {
-				event.setDroppedExperience((int)((float)event.getDroppedExperience() * (1.0F + 0.15F * (float)level)));
-			}
+			float multi = isBoss ? 0.5F : 0.15F;
+			int addedXp = Math.max((level + 1) / 2, (int) (event.getDroppedExperience() * level * multi));
+			event.setDroppedExperience(event.getDroppedExperience() + addedXp);
 		}
 	}
 }
