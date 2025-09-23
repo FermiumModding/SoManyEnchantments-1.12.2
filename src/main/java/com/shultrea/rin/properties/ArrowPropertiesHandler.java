@@ -186,7 +186,7 @@ public class ArrowPropertiesHandler {
 		if(EnchantmentRegistry.lesserFlame.isEnabled()) {
 			int levelLessFlame = EnchantmentHelper.getEnchantmentLevel(EnchantmentRegistry.lesserFlame, bow);
 			if(levelLessFlame > 0) {
-				arrow.setFire(50);
+				//arrow.setFire(50);
 				properties.setFlameLevel(1);
 			}
 		}
