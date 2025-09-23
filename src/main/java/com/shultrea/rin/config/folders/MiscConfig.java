@@ -27,7 +27,7 @@ public class MiscConfig {
     @Config.Name("Retain Double XP Orbs Bug")
     public boolean enableDoubleXPBug = false;
 
-    @Config.Comment("Evasion makes the player perform a dodge, disable if you want potentially dangerous forced dodges")
+    @Config.Comment("Evasion makes the player perform a dodge, enable if you want potentially dangerous forced dodges")
     @Config.Name("Evasion Dodge Effect")
     public boolean evasionDodgeEffect = true;
 
