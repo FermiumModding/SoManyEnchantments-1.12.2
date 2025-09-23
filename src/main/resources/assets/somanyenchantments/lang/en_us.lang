@@ -12,7 +12,7 @@ enchantment.ancientsealedcurses=Ancient Sealed Curses
 enchantment.somanyenchantments.ancientsealedcurses.desc=An ancient enchantment that causes attacks to curse the equipment of the enemy.
 
 enchantment.ancientswordmastery=Ancient Sword Mastery
-enchantment.somanyenchantments.ancientswordmastery.desc=An ancient enchantment that amplifies the damage increases from other sharpness enchantments.
+enchantment.somanyenchantments.ancientswordmastery.desc=An ancient enchantment that amplifies the dealt damage depending on the targets attack damage.
 
 enchantment.arcslash=Arc Slash
 enchantment.somanyenchantments.arcslash.desc=A variant of sweeping edge that trades slightly less damage for sweeping more often.

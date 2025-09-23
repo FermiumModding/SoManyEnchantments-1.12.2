@@ -9,6 +9,7 @@ import com.shultrea.rin.util.compat.RLCombatCompat;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
@@ -89,7 +90,9 @@ public class EnchantmentAncientSwordMastery extends EnchantmentBase {
 		int level = EnchantmentHelper.getEnchantmentLevel(this, stack);
 		if(level > 0) {
 			float strengthMulti = CompatUtil.isRLCombatLoaded() ? RLCombatCompat.getAttackEntityFromStrength() : 1.0F;
-			float enemyStrength = (float) victim.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue();
+			IAttributeInstance attr = victim.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
+			if(attr == null) return;
+			float enemyStrength = (float) attr.getAttributeValue();
 			//Hits cap of +12 dmg at enemy atk stat of 144 (if Ancient Sword Mastery 3=maxLvl and full hit)
 			//For a Vindicator (13.5 atk stat) it will be +3.7 dmg so around one strength lvl
 			event.setAmount(event.getAmount() + Math.min((float)level / this.getMaxLevel() * strengthMulti * MathHelper.sqrt(enemyStrength), 12));
