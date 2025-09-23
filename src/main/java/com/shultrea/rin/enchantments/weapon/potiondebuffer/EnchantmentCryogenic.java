@@ -79,16 +79,14 @@ public class EnchantmentCryogenic extends EnchantmentBase {
 		if(weapon.isEmpty()) return;
 		
 		if(!attacker.world.isRemote) {
-			if(attacker.getRNG().nextFloat() <= 0.15F + 0.15F * (float)level) {
-				PotionEffect slowness = victim.getActivePotionEffect(MobEffects.SLOWNESS);
-				PotionEffect fatigue = victim.getActivePotionEffect(MobEffects.MINING_FATIGUE);
+			PotionEffect slowness = victim.getActivePotionEffect(MobEffects.SLOWNESS);
+			PotionEffect fatigue = victim.getActivePotionEffect(MobEffects.MINING_FATIGUE);
 
-				int slownessAmp = slowness != null ? Math.min(slowness.getAmplifier() + 1, 3) : 0;
-				int fatigueAmp = fatigue != null ? Math.min(fatigue.getAmplifier() + 1, 3) : 0;
-				
-				victim.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 80, slownessAmp));
-				victim.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, 80, fatigueAmp));
-			}
+			int slownessAmp = slowness != null ? Math.min(slowness.getAmplifier() + 1, 3) : 0;
+			int fatigueAmp = fatigue != null ? Math.min(fatigue.getAmplifier() + 1, 3) : 0;
+
+			victim.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 80, slownessAmp));
+			victim.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, 80, fatigueAmp));
 		}
 	}
 	
@@ -114,23 +112,25 @@ public class EnchantmentCryogenic extends EnchantmentBase {
 				victim.extinguish();
 				if(attacker.getRNG().nextFloat() <= 0.2F * (float)level) {
 					event.setAmount(event.getAmount() * (1.0F + 0.2F * (float)level));
-					
-					BlockPos pos = new BlockPos(victim.posX, victim.posY, victim.posZ);
-					Iterable<BlockPos.MutableBlockPos> blocksToFreeze;
-					switch (level) {
-						case 1: blocksToFreeze = BlockPos.getAllInBoxMutable(pos, pos.add(0, 1, 0)); break;
-						case 2: blocksToFreeze = BlockPos.getAllInBoxMutable(pos.add(0, -1, 0), pos.add(1, 1, 1)); break;
-						case 3: default: blocksToFreeze = BlockPos.getAllInBoxMutable(pos.add(-1, -1, -1), pos.add(1, 2, 1));
-					}
-					for(BlockPos.MutableBlockPos mutablePos1 : blocksToFreeze) {
-						if(attacker.world.getBlockState(mutablePos1).getMaterial() == Material.AIR) {
-							attacker.world.setBlockState(mutablePos1, BlockRegistry.tempIce.getDefaultState());
-							attacker.world.scheduleUpdate(mutablePos1.toImmutable(), BlockRegistry.tempIce, MathHelper.getInt(attacker.getRNG(), 60, 120));
+
+					int range = Math.min(4, (level + 1) / 2);
+
+					for(BlockPos.MutableBlockPos mutablePosInBox : BlockPos.getAllInBoxMutable(-range, -range, -range, range, range, range)) {
+						if(taxiCabDistance(mutablePosInBox) <= range) {
+							BlockPos freezePos = victim.getPosition().add(mutablePosInBox);
+							if (attacker.world.getBlockState(freezePos).getMaterial() == Material.AIR) {
+								attacker.world.setBlockState(freezePos, BlockRegistry.tempIce.getDefaultState());
+								attacker.world.scheduleUpdate(freezePos, BlockRegistry.tempIce, MathHelper.getInt(attacker.getRNG(), 60, 120));
+							}
 						}
 					}
 					attacker.world.playSound(null, victim.posX, victim.posY, victim.posZ, SoundEvents.BLOCK_GLASS_BREAK, SoundCategory.PLAYERS, 0.8f, -1f);
 				}
 			}
 		}
+	}
+
+	private static int taxiCabDistance(BlockPos pos){
+		return Math.abs(pos.getX()) + Math.abs(pos.getY()) + Math.abs(pos.getZ());
 	}
 }
