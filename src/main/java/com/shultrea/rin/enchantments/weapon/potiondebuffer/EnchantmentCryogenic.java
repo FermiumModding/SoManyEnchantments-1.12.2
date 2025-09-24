@@ -11,6 +11,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -82,8 +83,9 @@ public class EnchantmentCryogenic extends EnchantmentBase {
 			PotionEffect slowness = victim.getActivePotionEffect(MobEffects.SLOWNESS);
 			PotionEffect fatigue = victim.getActivePotionEffect(MobEffects.MINING_FATIGUE);
 
-			int slownessAmp = slowness != null ? Math.min(slowness.getAmplifier() + 1, 3) : 0;
-			int fatigueAmp = fatigue != null ? Math.min(fatigue.getAmplifier() + 1, 3) : 0;
+			int ampIncrease = target instanceof EntityPlayer ? 1 : 2;
+			int slownessAmp = slowness != null ? Math.min(slowness.getAmplifier() + ampIncrease, 3) : 0;
+			int fatigueAmp = fatigue != null ? Math.min(fatigue.getAmplifier() + ampIncrease, 3) : 0;
 
 			victim.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 80, slownessAmp));
 			victim.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, 80, fatigueAmp));
@@ -110,7 +112,7 @@ public class EnchantmentCryogenic extends EnchantmentBase {
 			
 			if(slowness != null && slowness.getAmplifier() > 2 && fatigue != null && fatigue.getAmplifier() > 2) {
 				victim.extinguish();
-				if(attacker.getRNG().nextFloat() <= 0.2F * (float)level) {
+				if(attacker.getRNG().nextFloat() <= 0.1F * (float)level) {
 					event.setAmount(event.getAmount() * (1.0F + 0.2F * (float)level));
 
 					int range = Math.min(4, (level + 1) / 2);
