@@ -225,7 +225,8 @@ public class EnchantmentSubjectEnchantments extends EnchantmentBase {
 		if (!(target instanceof EntityLivingBase)) return;
 		if (weapon.isEmpty()) return;
 
-		if(CompatUtil.isRLCombatLoaded() && attacker.getRNG().nextFloat() > RLCombatCompat.getOnEntityDamagedAltStrength()) return;
+		if (CompatUtil.isRLCombatLoaded() && attacker.getRNG().nextFloat() > RLCombatCompat.getOnEntityDamagedAltStrength())
+			return;
 		if (this.damageType == PE) {
 			if (attacker.getRNG().nextFloat() < 0.05F * (float) level) {
 				attacker.addPotionEffect(new PotionEffect(MobEffects.HASTE, 120 + (level * 20), Math.min(3, level - 1)));
@@ -238,26 +239,24 @@ public class EnchantmentSubjectEnchantments extends EnchantmentBase {
 					attacker.addPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 20 + (level * 20), level - 5));
 				}
 			}
-		} else if(this.damageType == GEOGRAPHY) {
-			if (attacker.getRNG().nextFloat() < 0.1F + 0.02F * level) { //up to 20% chance
+		} else if (this.damageType == GEOGRAPHY) {
 			EntityLivingBase victim = (EntityLivingBase) target;
 			Set<BiomeDictionary.Type> types = BiomeDictionary.getTypes(attacker.world.getBiome(attacker.getPosition()));
 			int amp = 1; //lvl II
-			int dur = (400 * level) / getMaxLevel(); //up to 20 seconds of the effects
+			int dur = (200 * level) / getMaxLevel(); //up to 10 seconds of the effects
 			if (types.contains(BiomeDictionary.Type.HOT) || types.contains(BiomeDictionary.Type.NETHER)) {
 				target.setFire(level * 2); //up to 10 secs of fire
 			} else if (types.contains(BiomeDictionary.Type.COLD) || types.contains(BiomeDictionary.Type.SNOWY)) {
 				victim.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, dur, amp));
 				victim.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, dur, amp));
 			} else if (types.contains(BiomeDictionary.Type.SWAMP))
-				victim.addPotionEffect(new PotionEffect(MobEffects.POISON, dur * 2, 2));
+				victim.addPotionEffect(new PotionEffect(MobEffects.POISON, dur, amp));
 			else if (types.contains(BiomeDictionary.Type.WASTELAND))
-				victim.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, dur, 0));
+				victim.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, dur * 2, 0));
 			else if (types.contains(BiomeDictionary.Type.SPOOKY) || types.contains(BiomeDictionary.Type.DEAD))
 				victim.addPotionEffect(new PotionEffect(MobEffects.WITHER, dur, amp));
 			else if (types.contains(BiomeDictionary.Type.MAGICAL))
 				attacker.addPotionEffect(new PotionEffect(MobEffects.REGENERATION, dur / 2, 0));
-			}
 		}
 	}
 
