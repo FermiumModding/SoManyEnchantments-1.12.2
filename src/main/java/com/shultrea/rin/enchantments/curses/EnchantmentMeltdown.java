@@ -66,7 +66,7 @@ public class EnchantmentMeltdown extends EnchantmentCurse {
 		//Shouldn't ever be 0 but just incase weirdness
 		if(lvl <= 0) return;
 		if(shouldHit(lvl, random)) {
-			attacker.getEntityWorld().createExplosion(user, user.posX, user.posY, user.posZ, 1.90F + 0.30F * lvl, false);
+			attacker.getEntityWorld().newExplosion(user, user.posX, user.posY, user.posZ, 1.90F + 0.30F * lvl, true, false);
 			damageArmor(itemstack, 10 + random.nextInt(15 * lvl), user);
 		}
 		else {
