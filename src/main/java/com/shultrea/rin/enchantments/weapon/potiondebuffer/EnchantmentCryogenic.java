@@ -84,8 +84,8 @@ public class EnchantmentCryogenic extends EnchantmentBase {
 			PotionEffect fatigue = victim.getActivePotionEffect(MobEffects.MINING_FATIGUE);
 
 			int ampIncrease = target instanceof EntityPlayer ? 1 : 2;
-			int slownessAmp = slowness != null ? Math.min(slowness.getAmplifier() + ampIncrease, 3) : 0;
-			int fatigueAmp = fatigue != null ? Math.min(fatigue.getAmplifier() + ampIncrease, 3) : 0;
+			int slownessAmp = slowness != null ? Math.min(slowness.getAmplifier() + ampIncrease, 3) : ampIncrease-1;
+			int fatigueAmp = fatigue != null ? Math.min(fatigue.getAmplifier() + ampIncrease, 3) : ampIncrease-1;
 
 			victim.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 80, slownessAmp));
 			victim.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, 80, fatigueAmp));
@@ -110,7 +110,7 @@ public class EnchantmentCryogenic extends EnchantmentBase {
 			PotionEffect slowness = victim.getActivePotionEffect(MobEffects.SLOWNESS);
 			PotionEffect fatigue = victim.getActivePotionEffect(MobEffects.MINING_FATIGUE);
 			
-			if(slowness != null && slowness.getAmplifier() > 2 && fatigue != null && fatigue.getAmplifier() > 2) {
+			if(slowness != null && slowness.getAmplifier() >= 1 && fatigue != null && fatigue.getAmplifier() >= 1) {
 				victim.extinguish();
 				if(attacker.getRNG().nextFloat() <= 0.1F * (float)level) {
 					event.setAmount(event.getAmount() * (1.0F + 0.2F * (float)level));
