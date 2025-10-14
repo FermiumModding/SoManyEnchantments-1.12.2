@@ -74,8 +74,8 @@ public class EnchantmentAshDestroyer extends EnchantmentBase {
 		int level = EnchantmentHelper.getEnchantmentLevel(this, stack);
 		if(level > 0) {
 			if(victim.isBurning()) {
-				float fireSecondMulti = Math.min(1.0F, ((EntityAccessor) victim).getFireSeconds() / 32.F);
-				event.setAmount(event.getAmount() * (1.0F + 0.2F * (float)level * fireSecondMulti) );
+				float fireTickMulti = Math.min(1.0F, ((EntityAccessor) victim).getFireTicks() / 640.F);
+				event.setAmount(event.getAmount() * (1.0F + 0.2F * (float)level * fireTickMulti) );
 			}
 		}
 	}
