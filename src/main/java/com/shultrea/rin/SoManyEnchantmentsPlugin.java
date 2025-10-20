@@ -1,6 +1,7 @@
 package com.shultrea.rin;
 
 import com.llamalad7.mixinextras.MixinExtrasBootstrap;
+import com.shultrea.rin.util.compat.CompatUtil;
 import fermiumbooter.FermiumRegistryAPI;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 import org.spongepowered.asm.launch.MixinBootstrap;
@@ -15,6 +16,7 @@ public class SoManyEnchantmentsPlugin implements IFMLLoadingPlugin {
 		MixinExtrasBootstrap.init();
 		
 		FermiumRegistryAPI.enqueueMixin(false,"mixins.somanyenchantments.vanilla.json");
+		FermiumRegistryAPI.enqueueMixin(true,"mixins.somanyenchantments.bettercombat.json", CompatUtil::isRLCombatLoaded);
 	}
 	
 	@Override

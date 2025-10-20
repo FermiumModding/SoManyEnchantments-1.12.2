@@ -19,6 +19,7 @@
     "EntityDamageSourceMixin",
     "EntityLivingBaseMixin",
     "EntityPlayerMixin",
+    "EntityPlayerMixinSetFire",
     "EntityVillagerListEnchantedBookForEmeraldsMixin",
     "ForgeEnchantmentRegistryMixin",
     "IEntityCreeperMixin",
