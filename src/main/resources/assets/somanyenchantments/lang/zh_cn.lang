@@ -405,4 +405,4 @@ death.attack.deconstructed=%1$s 被分解成了原子
 death.attack.deconstructed.player=%1$s 被 %2$s 分解了
 
 # GUI提示
-enchantment.gui.bookshelfpower=书架之力
+enchantment.gui.bookshelfpower=有效书架数
