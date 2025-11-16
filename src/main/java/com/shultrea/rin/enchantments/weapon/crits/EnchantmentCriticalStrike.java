@@ -85,7 +85,7 @@ public class EnchantmentCriticalStrike extends EnchantmentBase {
 				int maxChance = 1000 - 50 * level;
 				int chance = 32 * counter;
 				
-				if(level >=20 || attacker.getRNG().nextInt(maxChance) >= chance) {
+				if(level < 20 && attacker.getRNG().nextInt(maxChance) >= chance) {
 					compound.setInteger("CriticalStrikeFailCount", counter);
 					attacker.world.playSound(null, attacker.posX, attacker.posY, attacker.posZ, SoundRegistry.CRITICAL_STRIKE_FAIL, SoundCategory.PLAYERS, 0.8F, 1.0F + (float)(2.0F * chance / maxChance));
 					event.setDamageModifier(Math.max(1.5F, event.getDamageModifier()));
