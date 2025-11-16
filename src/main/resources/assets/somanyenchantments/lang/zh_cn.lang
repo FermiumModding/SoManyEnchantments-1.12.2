@@ -5,13 +5,13 @@ enchantment.ancientsealedcurses=古代密封诅咒
 enchantment.somanyenchantments.ancientsealedcurses.desc=一种古代附魔，攻击时能诅咒敌人的装备。
 
 enchantment.ancientswordmastery=古代剑术精通
-enchantment.somanyenchantments.ancientswordmastery.desc=一种古代附魔，能够增幅其他锋利附魔带来的伤害提升。
+enchantment.somanyenchantments.ancientswordmastery.desc=一种古代附魔，根据敌人的力量属性增加伤害。
 
 enchantment.arcslash=弧光之刃
-enchantment.somanyenchantments.arcslash.desc=横扫之刃的变种，以些许伤害为代价换取更频繁的横扫效果。
+enchantment.somanyenchantments.arcslash.desc=横扫之刃的变种，有更强的横扫效果。
 
 enchantment.ashdestroyer=灰烬之击
-enchantment.somanyenchantments.ashdestroyer.desc=对燃烧的敌人造成更多伤害。
+enchantment.somanyenchantments.ashdestroyer.desc=根据敌人的剩余燃烧时间对燃烧的敌人造成更多伤害。
 
 enchantment.atomicdeconstructor=原子瓦解
 enchantment.somanyenchantments.atomicdeconstructor.desc=有较低的几率瞬间湮灭敌人。
@@ -32,7 +32,7 @@ enchantment.butchering=动物杀手
 enchantment.somanyenchantments.butchering.desc=对动物造成额外伤害，并增加掉落物。
 
 enchantment.clearskiesfavor=碧空恋歌
-enchantment.somanyenchantments.clearskiesfavor.desc=在白天时造成额外伤害，天空之下效果更强。
+enchantment.somanyenchantments.clearskiesfavor.desc=在晴天时造成额外伤害，天空之下效果更强。
 
 enchantment.combatmedic=经验老辣
 enchantment.somanyenchantments.combatmedic.desc=增强治疗效果。
@@ -41,7 +41,7 @@ enchantment.counterattack=反击
 enchantment.somanyenchantments.counterattack.desc=有几率自动反击近战攻击。
 
 enchantment.criticalstrike=致命一击
-enchantment.somanyenchantments.criticalstrike.desc=暴击有概率转化为超级暴击，造成更高伤害。
+enchantment.somanyenchantments.criticalstrike.desc=有概率大幅增加暴击伤害。
 
 enchantment.cryogenic=霜冻
 enchantment.somanyenchantments.cryogenic.desc=有几率使敌人叠加减速和疲劳效果，达到一定程度可将敌人冰冻。
@@ -164,13 +164,13 @@ enchantment.splitshot=分裂箭
 enchantment.somanyenchantments.splitshot.desc=使弓射出的箭分裂成多支。
 
 enchantment.strafe=扫射
-enchantment.somanyenchantments.strafe.desc=加快拉弓速度。
+enchantment.somanyenchantments.strafe.desc=加快拉弓速度并有一定概率在命中时不造成无敌帧。
 
 enchantment.strengthenedvitality=生机勃勃
 enchantment.somanyenchantments.strengthenedvitality.desc=提升最大生命值。
 
 enchantment.swifterslashes=唯快不破
-enchantment.somanyenchantments.swifterslashes.desc=大幅提高攻击速度，有几率无视敌人的无敌帧，但会降低伤害。
+enchantment.somanyenchantments.swifterslashes.desc=大幅提高攻击速度，有几率无视敌人的无敌帧的同时降低伤害。
 
 enchantment.thunderstormsbestowment=疾雷赐礼
 enchantment.somanyenchantments.thunderstormsbestowment.desc=雷暴雨天气时提高伤害，在雨中效果更强。
@@ -204,10 +204,10 @@ enchantment.somanyenchantments.wintersgrace.desc=在寒冷生物群系中提升�
 
 #Curses
 #诅咒
-enchantment.ascetic=禁欲之咒
+enchantment.ascetic=禁欲诅咒
 enchantment.somanyenchantments.ascetic.desc=你放弃了对战利品的需求。
 
-enchantment.bluntness=粗顿
+enchantment.bluntness=粗钝
 enchantment.somanyenchantments.bluntness.desc=降低武器的攻击伤害。
 
 enchantment.breachedplating=破甲诅咒
@@ -247,7 +247,7 @@ enchantment.instability=失稳
 enchantment.somanyenchantments.instability.desc=武器耐久度越低，造成的伤害越高，但会根据攻击伤害大幅降低武器耐久。
 
 enchantment.meltdown=融毁
-enchantment.somanyenchantments.meltdown.desc=荆棘的变体，被攻击时有概率引发爆炸并严重损坏盔甲。
+enchantment.somanyenchantments.meltdown.desc=荆棘的诅咒变体，被攻击时有概率引发爆炸并严重损坏盔甲。
 
 enchantment.pandorascurse=潘多拉诅咒
 enchantment.somanyenchantments.pandorascurse.desc=既然你已经了解了它的真相，那么接下来就好好享受痛苦吧。
@@ -267,7 +267,7 @@ enchantment.rune_arrowpiercing=符文：穿刺之箭
 enchantment.somanyenchantments.rune_arrowpiercing.desc=使箭矢的部分伤害转化为穿甲伤害。
 
 enchantment.rune_magicalblessing=符文：魔法祝福
-enchantment.somanyenchantments.rune_magicalblessing.desc=将攻击伤害转化为魔法伤害，使部分伤害能够穿透盔甲，并对敌人施加随机负面效果。
+enchantment.somanyenchantments.rune_magicalblessing.desc=将全部攻击伤害转化为魔法伤害，使部分伤害能够穿透盔甲，并对敌人施加随机负面效果。
 
 enchantment.rune_piercingcapabilities=符文：穿刺
 enchantment.somanyenchantments.rune_piercingcapabilities.desc=使攻击的部分伤害转化为穿甲伤害。
@@ -300,6 +300,9 @@ enchantment.somanyenchantments.subjectpe.desc=攻击时有机会给予使用者�
 
 enchantment.subjectphysics=学科：物理
 enchantment.somanyenchantments.subjectphysics.desc=根据使用者与目标之间的体型差异增加伤害。
+
+enchantment.subjectgeography=学科：地理
+enchantment.somanyenchantments.subjectgeography.desc=根据所在群系基于自己或者目标状态效果。
 
 #Lesser
 #低级
@@ -402,4 +405,4 @@ death.attack.deconstructed=%1$s 被分解成了原子
 death.attack.deconstructed.player=%1$s 被 %2$s 分解了
 
 # GUI提示
-enchantment.gui.bookshelfpower=书架之力
+enchantment.gui.bookshelfpower=有效书架数
