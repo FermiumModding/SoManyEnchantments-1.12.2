@@ -14,6 +14,7 @@ public class SoundRegistry {
         public static SoundEvent ATOMIC_DECONSTRUCT;
         public static SoundEvent PANDORA_REMOVAL;
         public static SoundEvent CULLING;
+        public static SoundEvent RUNE_REVIVAL;
         
         static {
                 CRITICAL_STRIKE = registerSound("critical_strike");
@@ -21,6 +22,7 @@ public class SoundRegistry {
                 ATOMIC_DECONSTRUCT = registerSound("atomic_deconstruct");
                 PANDORA_REMOVAL = registerSound("pandora_removal");
                 CULLING = registerSound("culling");
+                RUNE_REVIVAL = registerSound("rune_revival");
         }
         
         private static SoundEvent registerSound(String name) {
@@ -38,6 +40,7 @@ public class SoundRegistry {
                         event.getRegistry().register(ATOMIC_DECONSTRUCT);
                         event.getRegistry().register(PANDORA_REMOVAL);
                         event.getRegistry().register(CULLING);
+                        event.getRegistry().register(RUNE_REVIVAL);
                 }
         }
 }

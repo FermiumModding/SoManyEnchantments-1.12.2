@@ -26,5 +26,9 @@
 	"pandora_removal": {
 		"category": "player",
 		"sounds": [ "somanyenchantments:pandora_removal" ]
+	},
+	"rune_revival": {
+		"category": "player",
+		"sounds": [ "somanyenchantments:rune_revival" ]
 	}
 }

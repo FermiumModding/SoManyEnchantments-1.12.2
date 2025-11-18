@@ -1,9 +1,11 @@
 package com.shultrea.rin.mixin.vanilla;
 
 import com.shultrea.rin.registry.EnchantmentRegistry;
+import com.shultrea.rin.registry.SoundRegistry;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.SoundCategory;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
@@ -53,6 +55,7 @@ public abstract class ItemStackMixin {
 				if(shouldSave) {
 					broken = false;
 					instance.setItemDamage(Math.max(0, instance.getMaxDamage() - (int)((float)instance.getMaxDamage() * (0.25F + ((float)level * rand.nextFloat() / 3.0F)))));
+					damager.world.playSound(null, damager.posX, damager.posY, damager.posZ, SoundRegistry.RUNE_REVIVAL, SoundCategory.PLAYERS, 2F, 0.8F + 0.4F * rand.nextFloat());
 				}
 			}
 		}
