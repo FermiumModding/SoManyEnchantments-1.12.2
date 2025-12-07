@@ -155,7 +155,7 @@ enchantment.smelter=冶炼
 enchantment.somanyenchantments.smelter.desc=挖掘方块时，如果掉落物可以被熔炼，则自动冶炼，掉落物受时运附魔影响。
 
 enchantment.solsblessing=烈日礼赞
-enchantment.somanyenchantments.solsblessing.desc=在白天时造成额外伤害，天空之下效果更强，并有机会使敌人发光。
+enchantment.somanyenchantments.solsblessing.desc=在白天时造成额外伤害，天空之下效果更强，并使敌人发光。
 
 enchantment.spellbreaker=破法之刃
 enchantment.somanyenchantments.spellbreaker.desc=敌人身上药水效果越多，造成的伤害就越高，且对唤魔者和女巫有额外伤害加成。
