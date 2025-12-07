@@ -107,7 +107,7 @@ enchantment.luckmagnification=时来运转
 enchantment.somanyenchantments.luckmagnification.desc=增强使用者的幸运效果，使其影响暴击和战利品掉落。
 
 enchantment.lunasblessing=皎月祝词
-enchantment.somanyenchantments.lunasblessing.desc=在夜晚时造成额外伤害，夜空之下则伤害更高，并有几率使敌人失明。
+enchantment.somanyenchantments.lunasblessing.desc=在夜晚时造成额外伤害，夜空之下则伤害更高，并使敌人失明。
 
 enchantment.magicprotection=魔法保护
 enchantment.somanyenchantments.magicprotection.desc=保护的变体，降低使用者所承受的魔法伤害。
