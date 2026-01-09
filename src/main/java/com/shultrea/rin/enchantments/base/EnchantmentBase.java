@@ -41,12 +41,6 @@ public abstract class EnchantmentBase extends Enchantment {
 	}
 	
 	/**
-	 * @return the maximum level of the enchantment defined in config
-	 */
-	@Override
-	public abstract int getMaxLevel();
-	
-	/**
 	 * @return the minimum level cost needed
 	 */
 	@Override
@@ -74,12 +68,6 @@ public abstract class EnchantmentBase extends Enchantment {
 		return level == 1 && this.getMaxLevel() == 1 ? s :
 			   s + " " + I18n.translateToLocal("enchantment.level." + level);
 	}
-	
-	/**
-	 * @return if the enchantment is a treasure enchantment as defined in config
-	 */
-	@Override
-	public abstract boolean isTreasureEnchantment();
 	
 	/**
 	 * @return if the enchantment is allowed to be applied from an enchanting table
