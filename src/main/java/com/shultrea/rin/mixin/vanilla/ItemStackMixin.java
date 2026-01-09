@@ -1,5 +1,7 @@
 package com.shultrea.rin.mixin.vanilla;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.shultrea.rin.registry.EnchantmentRegistry;
 import com.shultrea.rin.registry.SoundRegistry;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -9,7 +11,6 @@ import net.minecraft.util.SoundCategory;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
-import org.spongepowered.asm.mixin.injection.Redirect;
 
 import java.util.Random;
 
@@ -35,12 +36,12 @@ public abstract class ItemStackMixin {
 	/**
 	 * Handling for Rune Revival
 	 */
-	@Redirect(
+	@WrapOperation(
 			method = "damageItem",
 			at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;attemptDamageItem(ILjava/util/Random;Lnet/minecraft/entity/player/EntityPlayerMP;)Z")
 	)
-	private boolean soManyEnchantments_vanillaItemStack_damageItem_attemptDamageItem(ItemStack instance, int amount, Random rand, EntityPlayerMP damager) {
-		boolean broken = instance.attemptDamageItem(amount, rand, damager);
+	private boolean soManyEnchantments_vanillaItemStack_damageItem_attemptDamageItem(ItemStack instance, int amount, Random rand, EntityPlayerMP damager, Operation<Boolean> original) {
+		boolean broken = original.call(instance, amount, rand, damager);
 		if(broken && EnchantmentRegistry.runeRevival.isEnabled()) {
 			int level = EnchantmentHelper.getEnchantmentLevel(EnchantmentRegistry.runeRevival, instance);
 			if(level > 0) {

@@ -1,44 +1,47 @@
 package com.shultrea.rin.mixin.vanilla;
 
+import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
+import com.llamalad7.mixinextras.sugar.Local;
+import com.llamalad7.mixinextras.sugar.ref.LocalDoubleRef;
 import com.shultrea.rin.enchantments.armor.protection.EnchantmentAdvancedBlastProtection;
 import com.shultrea.rin.enchantments.armor.protection.EnchantmentAdvancedFireProtection;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentProtection;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.Enchantments;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(EnchantmentProtection.class)
 public abstract class EnchantmentProtectionMixin {
-	
+
+	//fix blast protection flooring reduction making it not effective
+	@ModifyExpressionValue(
+			method = "getBlastDamageReduction",
+			at = @At(value = "INVOKE", target = "Lnet/minecraft/util/math/MathHelper;floor(D)I")
+	)
+	private static int soManyEnchantments_vanillaEnchantmentProtection_getBlastDamageReduction(int original, @Local(argsOnly = true) LocalDoubleRef damage, @Local int i){
+		damage.set(damage.get() * Math.max(0., 1.0 - (double)i * 0.15)); //reduce by 15% per lvl (2 lvls per adv blast prot), max reduction to 0%
+		return 0; //dont reduce using original truncated calc
+	}
+
 	/**
-	 * @author fonnymunkey
-	 * @reason fix blast protection flooring reduction making it not effective, include advanced blast protection handling
+	 * Handling for Advanced Blast Protection enchant
 	 */
-	@Overwrite
-	public static double getBlastDamageReduction(EntityLivingBase entityLivingBaseIn, double damage) {
-		int i = EnchantmentHelper.getMaxEnchantmentLevel(Enchantments.BLAST_PROTECTION, entityLivingBaseIn);
-		i += EnchantmentAdvancedBlastProtection.getValue(entityLivingBaseIn);
-		
-		if(i > 0) damage -= damage * Math.min(1D, (double)((float)i * 0.15F));
-		
-		return damage;
+	@ModifyExpressionValue(
+			method = "getBlastDamageReduction",
+			at = @At(value = "INVOKE", target = "Lnet/minecraft/enchantment/EnchantmentHelper;getMaxEnchantmentLevel(Lnet/minecraft/enchantment/Enchantment;Lnet/minecraft/entity/EntityLivingBase;)I")
+	)
+	private static int soManyEnchantments_vanillaEnchantmentProtection_getBlastDamageReduction(int original, EntityLivingBase entity) {
+		return original + EnchantmentAdvancedBlastProtection.getValue(entity);
 	}
 	
 	/**
 	 * Handling for Advanced Fire Protection enchant
 	 */
-	@Redirect(
+	@ModifyExpressionValue(
 			method = "getFireTimeForEntity",
 			at = @At(value = "INVOKE", target = "Lnet/minecraft/enchantment/EnchantmentHelper;getMaxEnchantmentLevel(Lnet/minecraft/enchantment/Enchantment;Lnet/minecraft/entity/EntityLivingBase;)I")
 	)
-	private static int soManyEnchantments_vanillaEnchantmentProtection_getFireTimeForEntity(Enchantment enchant, EntityLivingBase entity) {
-		int i = EnchantmentHelper.getMaxEnchantmentLevel(enchant, entity);
-		i += EnchantmentAdvancedFireProtection.getValue(entity);
-		return i;
+	private static int soManyEnchantments_vanillaEnchantmentProtection_getFireTimeForEntity(int original, EntityLivingBase entity) {
+		return original + EnchantmentAdvancedFireProtection.getValue(entity);
 	}
 }
