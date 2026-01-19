@@ -82,7 +82,7 @@ public class EnchantmentPurgingBlade extends EnchantmentBase {
 			if(arr.length == 0) return;
 			PotionEffect effect = arr[attacker.getRNG().nextInt(arr.length)];
 
-			event.setAmount(event.getAmount() * (1.0F + 0.02F * (float)(1 + effect.getAmplifier()) * (float)level));
+			event.setAmount(event.getAmount() * Math.min(2.0F, (1.0F + 0.02F * (float)(1 + effect.getAmplifier()) * (float)level)));
 			victim.removePotionEffect(effect.getPotion());
 		}
 	}
