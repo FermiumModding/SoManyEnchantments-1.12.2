@@ -207,7 +207,7 @@ public class CanApplyConfig {
 	@Config.Name("Rune: Resurrection")
 	public String[] runeResurrection = {"SHIELD"};
 	@Config.Name("Rune: Revival")
-	public String[] runeRevival = {"BREAKABLE"};
+	public String[] runeRevival = {"BREAKABLE", "!ARMOR"};
 	
 	//Subject
 	@Config.Name("Subject Biology")
