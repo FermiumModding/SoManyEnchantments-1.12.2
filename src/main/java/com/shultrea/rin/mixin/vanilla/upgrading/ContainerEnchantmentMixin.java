@@ -42,7 +42,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-@Mixin(ContainerEnchantment.class)
+@Mixin(value = ContainerEnchantment.class, priority = 500)
 public abstract class ContainerEnchantmentMixin extends Container implements IContainerEnchantmentMixin {
 
     @Shadow public IInventory tableInventory;
@@ -161,27 +161,24 @@ public abstract class ContainerEnchantmentMixin extends Container implements ICo
 
     @Inject(
             method = "onCraftMatrixChanged",
-            at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isEmpty()Z"),
-            cancellable = true
+            at = @At(value = "FIELD", target = "Lnet/minecraft/inventory/ContainerEnchantment;worldClue:[I", ordinal = 2)
     )
-    private void soManyEnchantments_vanillaContainerEnchantment_onCraftMatrixChanged_earlyReturn(IInventory inventoryIn, CallbackInfo ci, @Local ItemStack targetItem, @Share("itemIsEnchantable") LocalBooleanRef itemIsEnchantable, @Share("itemIsUpgradeable") LocalBooleanRef itemIsUpgradeable){
-        itemIsEnchantable.set(targetItem.isItemEnchantable());
-        itemIsUpgradeable.set((targetItem.isItemEnchanted() || targetItem.getItem() == Items.ENCHANTED_BOOK) && (ModConfig.upgrade.allowLevelUpgrades || ModConfig.upgrade.allowTierUpgrades));
-
-        if(targetItem.isEmpty() || (!itemIsEnchantable.get() && !itemIsUpgradeable.get())) {
-            ci.cancel();
-
-            //Both client+serverside reset all their values if left slot has nothing or nothing enchantable/upgradeable
-            soManyEnchantments$resetValues();
-        }
+    private void soManyEnchantments_vanillaContainerEnchantment_onCraftMatrixChanged_resetIfFail(IInventory inventoryIn, CallbackInfo ci, @Share("alreadyReset") LocalBooleanRef alreadyReset){
+        if(alreadyReset.get()) return;
+        //Both client+serverside reset all their values if left slot has nothing or nothing enchantable/upgradeable
+        soManyEnchantments$resetValues();
+        alreadyReset.set(true);
     }
 
-    @WrapOperation(
+    @ModifyExpressionValue(
             method = "onCraftMatrixChanged",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isItemEnchantable()Z")
     )
-    private boolean soManyEnchantments_vanillaContainerEnchantment_onCraftMatrixChanged_allowUpgradingGenerally(ItemStack targetItem, Operation<Boolean> original, @Share("itemIsUpgradeable") LocalBooleanRef itemIsUpgradeable){
-        return original.call(targetItem) || itemIsUpgradeable.get();
+    private boolean soManyEnchantments_vanillaContainerEnchantment_onCraftMatrixChanged_allowUpgradingGenerally(boolean isEnchantable, @Local(name = "itemstack") ItemStack targetItem, @Share("itemIsEnchantable") LocalBooleanRef itemIsEnchantable, @Share("itemIsUpgradeable") LocalBooleanRef itemIsUpgradeable){
+        itemIsEnchantable.set(isEnchantable);
+        itemIsUpgradeable.set((targetItem.isItemEnchanted() || targetItem.getItem() == Items.ENCHANTED_BOOK) && (ModConfig.upgrade.allowLevelUpgrades || ModConfig.upgrade.allowTierUpgrades));
+
+        return isEnchantable || itemIsUpgradeable.get();
     }
 
     @ModifyExpressionValue(
@@ -326,16 +323,6 @@ public abstract class ContainerEnchantmentMixin extends Container implements ICo
         //Sanity checks for both enchanting and upgrading
         if (id < 0 || id > 2) cir.setReturnValue(false);
         if(targetItem.isEmpty()) cir.setReturnValue(false);
-    }
-
-    @Inject(
-            method = "enchantItem",
-            at = @At(value = "FIELD", target = "Lnet/minecraft/world/World;isRemote:Z"),
-            cancellable = true
-    )
-    private void soManyEnchantments_vanillaContainerEnchantment_enchantItem_preventDoubleEnchanting(EntityPlayer playerIn, int id, CallbackInfoReturnable<Boolean> cir, @Local(name = "itemstack") ItemStack targetItem){
-        //Add sanity check to prevent double processing during lag
-        if(!targetItem.isItemEnchantable()) cir.setReturnValue(false);
     }
 
     @WrapOperation(
