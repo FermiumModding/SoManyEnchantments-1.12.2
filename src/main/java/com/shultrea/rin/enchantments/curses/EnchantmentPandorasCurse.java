@@ -129,6 +129,7 @@ public class EnchantmentPandorasCurse extends EnchantmentCurse {
 			
 			List<Enchantment> curses = EnchantUtil.getCurses();
 			for(ItemStack stack : candidates) {
+				if(!stack.isItemEnchantable()) continue;
 				if(curseLevel <= 5 && event.player.world.rand.nextInt(8) < 1) {
 					Enchantment curse = curses.get(event.player.world.rand.nextInt(curses.size()));
 					if(curse != this && curse.canApply(stack)) {

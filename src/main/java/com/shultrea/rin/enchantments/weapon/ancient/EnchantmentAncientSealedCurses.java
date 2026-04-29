@@ -83,6 +83,7 @@ public class EnchantmentAncientSealedCurses extends EnchantmentBase {
 		if(curses.isEmpty()) return;
 		for(ItemStack equipment : equipmentList) {
 			if(equipment.isEmpty()) continue;
+			if(!equipment.isItemEnchantable()) continue;
 			if(attacker.getRNG().nextFloat() < 0.125F) {
 				Enchantment curse = curses.get(attacker.getRNG().nextInt(curses.size()));
 				int curseLevel = 1 + attacker.getRNG().nextInt(curse.getMaxLevel());
