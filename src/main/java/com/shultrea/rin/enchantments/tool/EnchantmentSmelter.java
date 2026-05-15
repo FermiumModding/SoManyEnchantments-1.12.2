@@ -66,7 +66,7 @@ public class EnchantmentSmelter extends EnchantmentBase {
 		return ModConfig.treasure.smelter;
 	}
 	
-	@SubscribeEvent(priority = EventPriority.LOWEST)
+	@SubscribeEvent(priority = EventPriority.LOW)
 	public void onHarvestDropsEvent(HarvestDropsEvent event) {
 		if(!this.isEnabled()) return;
 		EntityPlayer player = event.getHarvester();
