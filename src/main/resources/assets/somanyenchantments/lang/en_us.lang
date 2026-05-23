@@ -2,9 +2,6 @@ gui.jei.category.upgrading=Enchantment Upgrading
 
 attribute.name.somanyenchantments.enchantfocus=Enchanting Focus
 
-tooltip.anviluses_singular= %d Anvil use (%d)
-tooltip.anviluses= %d Anvil uses (%d)
-
 enchantment.adept=Adept
 enchantment.somanyenchantments.adept.desc=Increases dropped XP, scaling higher against bosses.
 

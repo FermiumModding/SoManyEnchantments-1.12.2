@@ -184,15 +184,7 @@ public class MiscConfig {
     public String[] blacklistedRegistryEnchants = {
     };
 
-    @Config.Comment("If set to true, remove anvil repair cost increase when combining two single enchant books with the same lvl (Prot 3 + Prot 3)")
-    @Config.Name("Remove book combination anvil cost increase")
-    public boolean removeBookCombinationAnvilCost = false;
-
     @Config.Comment("If set to true, Curse of Possession will delete cursed items dropped from inventory on death when no player can be found")
     @Config.Name("Curse Of Possession Death Deletion")
     public boolean curseOfPossessionDeathDeletion = true;
-
-    @Config.Comment("When in the container gui, adds a tooltip to items with anvil uses to indicate how often they have been used at the anvil already. Only in advanced mode = F3+H")
-    @Config.Name("Show Anvil Use Tooltip")
-    public boolean addAnvilUseTooltip = true;
 }
