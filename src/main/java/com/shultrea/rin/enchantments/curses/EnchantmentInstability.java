@@ -77,7 +77,7 @@ public class EnchantmentInstability extends EnchantmentCurse {
 				float percentage = (float)stack.getItemDamage() / (float)stack.getMaxDamage();
 				percentage = 1.0F + percentage * 0.75F * (float)level;
 				event.setAmount(event.getAmount() * percentage);
-				stack.damageItem(1 + (int)(attacker.getRNG().nextFloat() * event.getAmount() / (float)(8 - level)), attacker);
+				stack.damageItem(1 + (int)(attacker.getRNG().nextFloat() * event.getAmount() / (float)Math.max(8 - level, 1)), attacker);
 			}
 		}
 	}
