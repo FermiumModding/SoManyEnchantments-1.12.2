@@ -76,7 +76,6 @@ public class EnchantmentParry extends EnchantmentBase {
 		
 		int level = EnchantmentHelper.getMaxEnchantmentLevel(this, victim);
 		if(level > 0) {
-			if(EnchantmentHelper.getEnchantmentLevel(EnchantmentRegistry.trueStrike, attacker.getHeldItemMainhand()) > 0) return;
 			//Slightly boost chance of proc when combined with Counter Attack
 			int levelCounter = EnchantmentHelper.getMaxEnchantmentLevel(EnchantmentRegistry.counterAttack, victim);
 			
