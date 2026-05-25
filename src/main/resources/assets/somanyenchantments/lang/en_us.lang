@@ -48,10 +48,10 @@ enchantment.criticalstrike=Critical Strike
 enchantment.somanyenchantments.criticalstrike.desc=Gives your critical hits an increasing chance to turn into a super-critical hit for greatly amplified damage.
 
 enchantment.cryogenic=Cryogenic
-enchantment.somanyenchantments.cryogenic.desc=Gives a chance to apply stacking slowness and fatigue to an enemy, which when over a certain threshold can freeze the enemy into a block of ice.
+enchantment.somanyenchantments.cryogenic.desc=Gives a chance to apply stacking slowness and fatigue to an enemy, which can freeze the enemy into a block of ice.
 
 enchantment.culling=Culling
-enchantment.somanyenchantments.culling.desc=If an attack would leave an enemy with health below a certain threshold, instantly kills the enemy instead. If successful, also drops the head of that enemy.
+enchantment.somanyenchantments.culling.desc=If an attack would leave an enemy with low health, instantly kills the enemy instead. If successful, also drops the head of that enemy.
 
 enchantment.darkshadows=Dark Shadows
 enchantment.somanyenchantments.darkshadows.desc=Your attacks deal increased damage when striking from the shadows, and additionally can blind enemies.
