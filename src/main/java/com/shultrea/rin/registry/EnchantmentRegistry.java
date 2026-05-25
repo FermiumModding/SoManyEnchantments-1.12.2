@@ -51,7 +51,7 @@ public class EnchantmentRegistry {
 	public static EnchantmentBase blessedEdge = register(new EnchantmentBlessedEdge("blessededge", Enchantment.Rarity.valueOf(ModConfig.rarity.blessedEdge), Slots.HAND));
 	public static EnchantmentBase brutality = register(new EnchantmentBrutality("brutality", Enchantment.Rarity.valueOf(ModConfig.rarity.brutality), Slots.HAND));
 	public static EnchantmentBase burningShield = register(new EnchantmentBurningShield("burningshield", Enchantment.Rarity.valueOf(ModConfig.rarity.burningShield), Slots.HAND));
-	public static EnchantmentBase burningThorns = register(new EnchantmentBurningThorns("burningthorns", Enchantment.Rarity.valueOf(ModConfig.rarity.burningThorns), Slots.BODY));
+	public static EnchantmentBase burningThorns = register(new EnchantmentBurningThorns("burningthorns", Enchantment.Rarity.valueOf(ModConfig.rarity.burningThorns), Slots.ALL));
 	public static EnchantmentBase butchering = register(new EnchantmentButchering("butchering", Enchantment.Rarity.valueOf(ModConfig.rarity.butchering), Slots.HAND));
 	public static EnchantmentBase clearskiesFavor = register(new EnchantmentClearskiesFavor("clearskiesfavor", Enchantment.Rarity.valueOf(ModConfig.rarity.clearskiesFavor), Slots.HAND));
 	public static EnchantmentBase combatMedic = register(new EnchantmentCombatMedic("combatmedic", Enchantment.Rarity.valueOf(ModConfig.rarity.combatMedic), Slots.HEAD));
@@ -175,7 +175,7 @@ public class EnchantmentRegistry {
 	public static EnchantmentBase advancedPunch = register(new EnchantmentAdvancedPunch("advancedpunch", Enchantment.Rarity.valueOf(ModConfig.rarity.advancedPunch), Slots.HAND));
 	public static EnchantmentBase advancedSharpness = register(new EnchantmentTierDamage("advancedsharpness", Enchantment.Rarity.valueOf(ModConfig.rarity.advancedSharpness), 1, Slots.HAND));
 	public static EnchantmentBase advancedSmite = register(new EnchantmentTierDamage("advancedsmite", Enchantment.Rarity.valueOf(ModConfig.rarity.advancedSmite), 4, Slots.HAND));
-	public static EnchantmentBase advancedThorns = register(new EnchantmentAdvancedThorns("advancedthorns", Enchantment.Rarity.valueOf(ModConfig.rarity.advancedThorns), Slots.BODY));
+	public static EnchantmentBase advancedThorns = register(new EnchantmentAdvancedThorns("advancedthorns", Enchantment.Rarity.valueOf(ModConfig.rarity.advancedThorns), Slots.ALL));
 	//Supreme
 	public static EnchantmentBase supremeBaneOfArthropods = register(new EnchantmentTierDamage("supremebaneofarthropods", Enchantment.Rarity.valueOf(ModConfig.rarity.supremeBaneOfArthropods),8, Slots.HAND));
 	public static EnchantmentBase supremeFireAspect = register(new EnchantmentTierFA("supremefireaspect", Enchantment.Rarity.valueOf(ModConfig.rarity.supremeFireAspect),2, Slots.HAND));
