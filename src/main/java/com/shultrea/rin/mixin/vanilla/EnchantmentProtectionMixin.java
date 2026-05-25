@@ -31,7 +31,7 @@ public abstract class EnchantmentProtectionMixin {
 			at = @At(value = "INVOKE", target = "Lnet/minecraft/enchantment/EnchantmentHelper;getMaxEnchantmentLevel(Lnet/minecraft/enchantment/Enchantment;Lnet/minecraft/entity/EntityLivingBase;)I")
 	)
 	private static int soManyEnchantments_vanillaEnchantmentProtection_getBlastDamageReduction(int original, EntityLivingBase entity) {
-		return original + EnchantmentAdvancedBlastProtection.getValue(entity);
+		return original + 2 * EnchantmentAdvancedBlastProtection.getValue(entity);
 	}
 	
 	/**
@@ -42,6 +42,6 @@ public abstract class EnchantmentProtectionMixin {
 			at = @At(value = "INVOKE", target = "Lnet/minecraft/enchantment/EnchantmentHelper;getMaxEnchantmentLevel(Lnet/minecraft/enchantment/Enchantment;Lnet/minecraft/entity/EntityLivingBase;)I")
 	)
 	private static int soManyEnchantments_vanillaEnchantmentProtection_getFireTimeForEntity(int original, EntityLivingBase entity) {
-		return original + EnchantmentAdvancedFireProtection.getValue(entity);
+		return original + 2 * EnchantmentAdvancedFireProtection.getValue(entity);
 	}
 }
