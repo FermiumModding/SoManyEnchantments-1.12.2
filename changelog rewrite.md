@@ -51,44 +51,47 @@ Last change: May 25 2026, unfinished
 
 #### armor - protection (mutually exclusive)
 
-* Adv Blast/Fire/Proj/Prot
+* Adv Blast Prot - fixed vanilla blast prot not working sometimes, 2x as effective
+* Adv Fire Prot - removed weird old fire handling, now just 2x as effective as normal fire prot against burn time
+* Adv Proj Prot - unchanged
+* Adv Prot - unchanged
 * Supr Prot - new
-* Magic Prot
-* Phys Prot
+* Magic Prot - unchanged
+* Phys Prot - unchanged
 
 #### armor - thorns (mutually exclusive)
 
-* Adv Thorns
+* Adv Thorns - changed dura dmg from 4-10 or 2-4 if no block to 4 - 4+lvl or 2 - 2+lvl if no block, removed different dmg scaling for adv thorns 5+
 * Burn Thorns - fixed not taking dura dmg (more exactly: only if another piece had normal thorns)
 
 #### armor - other
 
 * Combat Medic - new, Helmet, increased healing
 * Evasion - fixed iframe change if max iframes are modified (now max +0/+5/+10, was 20/25/30)
-* Inner Berserk
-* Light Weight
+* Inner Berserk - unchanged
+* Light Weight - unchanged
 * Magma Walker - swapped real magma with temporary magma blocks that re-melt when lava is nearby, now incompat with frost walker
 * Str Vit - simplified code
 * Swift Swimming - renamed from UW Strider, simplified code
 
 #### bow
 
-* Adv Pow
-* Adv Punch
-* Pushing
-* Splitshot
+* Adv Pow - simplified code
+* Adv Punch - simplified code
+* Pushing - fixed divide by zero at lvl 5
+* Splitshot - unchanged
 * Strafe - Simplified draw speed calculation
 * Lesser/Adv/Supr Flame - fix item type being sword
 
 #### curses
 
 * Ascetic - new
-* Bluntness
-* Breached Plating - incompat with phys prot
+* Bluntness - now -1*lvl, was -0.5-0.5*lvl
+* Breached Plating - new, incompat with phys prot
 * Cursed Edge - changed self hit dmg type from generic to magic, buffed to up to x3 dmg (from x2), simplified calcs
-* C.o. Decay
-* C.o. Holding
-* C.o. Inacc
+* C.o. Decay - now subscribes JoinWorld instead of ItemToss, so works on more item entities
+* C.o. Holding - removed additional luck attribute modifier of -100% * lvl @op1
+* C.o. Inacc - unchanged, moved arrow handling to mixin to simplify
 * C.o. Poss
 * C.o. Vuln - incompat with Combat Medic, Str Vit
 * Dragging - now a curse, fixed potential crash if lvl >5
@@ -103,14 +106,14 @@ Last change: May 25 2026, unfinished
 
 #### fishing
 
-* Adv Luck of the Sea
-* Adv Lure
+* Adv Luck of the Sea - unchanged
+* Adv Lure - unchanged
 
 #### hoe
 
-* Jagged Rake
-* Moisturized
-* Plowing
+* Jagged Rake - unchanged
+* Moisturized - unchanged
+* Plowing - unchanged
 
 #### rune
 
