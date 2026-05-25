@@ -13,6 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -85,7 +86,25 @@ public class EnchantmentMortalitas extends EnchantmentBase {
 		}
 	}
 
-	//TODO: decrease counter over time
+	@SubscribeEvent
+	public void onLivingUpdate(LivingEvent.LivingUpdateEvent event) {
+		if(!this.isEnabled()) return;
+		EntityLivingBase entity = event.getEntityLiving();
+		if(entity == null) return;
+		if(entity.world.isRemote) return;
+		if(entity.ticksExisted%20 != 0) return;
+		ItemStack stack = entity.getHeldItemMainhand();
+		if(stack.isEmpty()) return;
+		if(!stack.hasTagCompound()) return;
+		NBTTagCompound compound = stack.getTagCompound();
+		if(!compound.hasKey("MortalitasDamage")) return;
+		float damage = compound.getFloat("MortalitasDamage");
+		//reduces by 1 kill (0.05) per minute at max ench lvl, faster on lower lvl
+		damage -= 0.05F/60F;
+
+		if(damage <= 0) compound.removeTag("MortalitasDamage");
+		else compound.setFloat("MortalitasDamage", damage);
+	}
 	
 	@SubscribeEvent(priority = EventPriority.LOW)
 	public void onLivingDeathEvent(LivingDeathEvent event) {
