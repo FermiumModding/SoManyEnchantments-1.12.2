@@ -170,16 +170,16 @@ Last change: May 25 2026, unfinished
 #### weapon - potiondebuffer (mutually exclusive)
 
 * Cryogenic - new Freezing. will now create ice blocks that turn into air when melting. code for ice blocks+potion effect thresholds dramatically simplified, now symmetric block with arbitrary size (depending on ench lvl)
-* Desolator
-* Disor Blade
-* Envenomed
+* Desolator - increased trigger chance from 8%*lvl to 15%*lvl, removed op x1.2/x2.4/x3.6 dmg multi, reduced weakness + neg. resistance durations (7s → 2/2.5/3s)
+* Disor Blade - changed trigger chance from 10%/10%/100%/100% to 15%/30%/45%/60%. now only causes nausea+blindness (if 3+), not slowness or weakness, increased durations by 1s (now 2.5s/3s/3.5s/4s)
+* Envenomed - nerfed wither lvl (0/0/3, was 2/3/4), increased durations by half a sec (now 2.5s/3s/3.5s), added trigger chance (20%/40%/60%, was 100%)
 * Hors De Combat - will now apply one of an increased pool of vanilla potion effects randomly (20%*lvl chance), instead of 10% chance to apply 2-4 fixed effects
-* Levitator
-* Purification
+* Levitator - reduced lvl by 1 (now 2/3, was 3/4), reduced duration by about half a sec (1.5s/2s, was 2.1s/2.7s)
+* Purification - reduced duration of weakness+slowness on undead (1.5/2/2.5/3/3.5s, was 1/2/3/4/5s or 1.5/3/4.5/6/7.5s), add spawnercontrol checks, set iframes after conversion to max (was 15 ticks)
 
 #### weapon - selfheal (mutually exclusive)
 
-* Blessed Edge
+* Blessed Edge - fully overhauled: gives targets lycanitesmobs:smited 1 for 10s. if the target is undead, heals for 10%*lvl of dmg dealt & increases dmg by the same amount
 * Lifesteal - removed small dmg increase of 5%*lvl, now heals 3%/6%/9% of dmg dealt (was 2.5%/5%/7.5%)
 
 #### weapon - subject (mutually exclusive)
@@ -189,8 +189,8 @@ Last change: May 25 2026, unfinished
 * Subject English - disabled, now more dmg the longer the mobs name
 * Subject History - re-added, now more dmg the longer you stay at one spot, through rlmixins. SME behavior: more dmg with local difficulty
 * Subject Mathematics - re-added, now more dmg if lots of xp on the player
-* Subject P.E.
-* Subject Physics - new, more dmg if big height difference
+* Subject P.E. - simplified. removed flat dmg of 0.75+0.25*lvl. changed trigger chance from flat 8.5% to 5%*lvl. removed regeneration. now potion lvls: Haste&Speed 1/2/3/4/5, Strength&Jump Boost 0/0/1/2/3, Resistance 0/0/0/0/1 with durations 7s,9s,8s,8s,6s for those 5 effects when max ench lvl, was weird af before
+* Subject Physics - new, more dmg if big body size difference
 * Subject Geography - new, changes DDD dmg type of weapon depending on biome type through rlmixins. SME behavior: applies potion effects depending on biome type
 
 #### weapon - weather (mutually exclusive)
@@ -236,10 +236,10 @@ Last change: May 25 2026, unfinished
 ### Attack Strength Scaling
 
 #### general idea
-- dmg multi -> no strength limit
-- dmg add -> scale with strength
-- potion add always -> do it with chance = strMulti, except if it applies only for certain creature types (like vanilla BoA)
-- potion add chance -> chance scales with strength
+- dmg multi → no strength limit
+- dmg add → scale with strength
+- potion add always → do it with chance = strMulti, except if it applies only for certain creature types (like vanilla BoA)
+- potion add chance → chance scales with strength
 - any crazy effects only on full hit
 - iframe bypass on any strength
 
