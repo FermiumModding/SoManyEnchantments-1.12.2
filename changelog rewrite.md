@@ -30,12 +30,12 @@ Last change: May 25 2026, unfinished
 * Ascetic (less/no loot/fish loot)
 * Extinguish (removes fire)
 
-### Enchantment removals (disabled through config)
+### Enchantment removals
 
-* Subject English (more dmg the longer the mobs name)
-* Quarrying (was disabled and didnt work anyway)
+* Subject English (disabled through config, more dmg the longer the mobs name)
+* Quarrying, Biome Presence, Adv Respiration, Rune: Starfall (deleted entirely. were disabled/unfinished before or didnt work anyway)
 
-### New Incompat Rules (rest in individual groups)
+### New Incompat Rules (more in individual groups)
 * Made lesser/normal/adv/supreme enchants be applicable independently of each other so a weapon can have BoA + Adv Smite + Supr Sharp (but only one per tier and one per type)
     * Spell Breaker and Penetrating Edge are part of the supreme group
     * Blessed Edge is in the smite group
@@ -44,6 +44,8 @@ Last change: May 25 2026, unfinished
 * Made Crit Strike and Luck Magnification incompat with each other but with no other enchants (crit enchants)
 * Simplified Dmg Multi Incompat Group, now contains Ash, Reviled, Instability, Cursed Edge
 * Simplified Conditional Dmg Incompat Group, now only contains Mortalitas, Viper, Dark Shadows, those have no other incompats anymore
+
+
 
 ### Enchantment changes (incomplete):
 
@@ -80,7 +82,7 @@ Last change: May 25 2026, unfinished
 
 #### curses
 
-* Ascetic
+* Ascetic - new
 * Bluntness
 * Breached Plating - incompat with phys prot
 * Cursed Edge - changed self hit dmg type from generic to magic, buffed to up to x3 dmg (from x2), simplified calcs
@@ -90,7 +92,7 @@ Last change: May 25 2026, unfinished
 * C.o. Poss
 * C.o. Vuln - incompat with Combat Medic, Str Vit
 * Dragging - now a curse, fixed potential crash if lvl >5
-* Extinguish
+* Extinguish - new
 * Heavy Weight - incompat with Swifter Slashes, Evasion, Light Weight
 * Inefficient
 * Instability - still 1x - 3.25x (max if item 0 dura left). added divide by zero safety for high lvl instability
@@ -114,7 +116,7 @@ Last change: May 25 2026, unfinished
 
 * R: Arrow Piercing
 * R: Magical Blessing, re-added and fixed, weapon: magic dmg, some armor ignore, random debuffs
-* R: Piercing Cap
+* R: Piercing Cap.
 * R: Resurrection, re-added and fixed, totem on shields
 * R: Revival, re-added and fixed, not on armor: chance to not break the item on 0 dura, added sound
 
@@ -133,12 +135,12 @@ Last change: May 25 2026, unfinished
 #### weapon - ancient
 
 * Anc Sealed Curses - re-added and fixed, apply curses on target
-* Anc Sword Mastery - re-added and fixed, more dmg the higher the targets atk stat
+* Anc Sword Mastery - re-added and fixed, more dmg the higher the targets atk stat (max +12 at 144 atk dmg)
 
 #### weapon - conditionaldamage (mutually exclusive)
 
 * Dark Shadows - Increased dmg (+1+2.5*lvl, was +0.75*lvl), simplified conditions, only attacker needs to be in darkness, added scaling to blindness chance (10%/20%/30%, was 10%)
-* Mortalitas - Made Mortalitas only incompatible with Viper and Dark Shadows (conditional dmg enchants)
+* Mortalitas - way more compatible now. made added dmg decay slowly over time (1 kill per minute)
 * Viper - Fixed Viper adding 1 dmg flat at any lvl
 
 #### weapon - crits (mutually exclusive)
@@ -164,18 +166,18 @@ Last change: May 25 2026, unfinished
 
 #### weapon - potiondebuffer (mutually exclusive)
 
-* Cryogenic - new Freezing. will now create ice blocks that turn into air when melting. code for ice block dramatically simplified, now symmetric
+* Cryogenic - new Freezing. will now create ice blocks that turn into air when melting. code for ice blocks+potion effect thresholds dramatically simplified, now symmetric block with arbitrary size (depending on ench lvl)
 * Desolator
 * Disor Blade
 * Envenomed
-* Hors De Combat - will now give various vanilla potion effects randomly
+* Hors De Combat - will now apply one of an increased pool of vanilla potion effects randomly (20%*lvl chance), instead of 10% chance to apply 2-4 fixed effects
 * Levitator
 * Purification
 
 #### weapon - selfheal (mutually exclusive)
 
 * Blessed Edge
-* Lifesteal
+* Lifesteal - removed small dmg increase of 5%*lvl, now heals 3%/6%/9% of dmg dealt (was 2.5%/5%/7.5%)
 
 #### weapon - subject (mutually exclusive)
 
@@ -203,7 +205,7 @@ Last change: May 25 2026, unfinished
 
 * Adv Knockback
 * Adv Looting
-* Arc  Slash
+* Arc Slash
 * At. Decon. - New death message "was reduced to atoms/was deconstructed by"
 * Brutality - Fixed not scaling with enchant lvl
 * Counter Atk - re-added + fully overhauled: non-magic thorns on weapon, boosted slightly if parry is also present
@@ -211,7 +213,7 @@ Last change: May 25 2026, unfinished
 * Disarmament
 * Fiery Edge
 * Flinging
-* Parry - boosted slightly if counter attack is also present, ignored if attacker has true strike
+* Parry - boosted slightly if counter attack is also present, ignored if attacker has true strike. fixed iframe issue by setting iframes to max +0/+5/+10 instead of to 15
 * Purging Blade - Fully overhauled. Now gives a dmg increase if a potion effect is removed, multiplier depending on that effects lvl (capped at total x2)
 * Swifter Slashes
 * Less/Adv/Supr Fire Aspect
