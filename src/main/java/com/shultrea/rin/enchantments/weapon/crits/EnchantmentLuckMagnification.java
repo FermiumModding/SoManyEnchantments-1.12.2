@@ -94,7 +94,7 @@ public class EnchantmentLuckMagnification extends EnchantmentBase {
 			}
 			if(event.getResult() == Event.Result.ALLOW || (event.isVanillaCritical() && event.getResult() == Event.Result.DEFAULT)) {
 				if(attacker.getRNG().nextFloat() < Math.min(0.2F, 0.02F * amount * (float)level)) {
-					event.setDamageModifier(event.getDamageModifier() + amount * 0.1F * (float)level);
+					event.setDamageModifier(event.getDamageModifier() + Math.min(amount * 0.1F * (float)level, 2.0F));
 				}
 			}
 		}
