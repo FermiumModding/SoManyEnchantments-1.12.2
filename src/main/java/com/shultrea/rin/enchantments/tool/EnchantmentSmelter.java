@@ -1,10 +1,9 @@
 package com.shultrea.rin.enchantments.tool;
 
 import com.shultrea.rin.config.ConfigProvider;
-import com.shultrea.rin.config.folders.EnchantabilityConfig;
 import com.shultrea.rin.config.ModConfig;
+import com.shultrea.rin.config.folders.EnchantabilityConfig;
 import com.shultrea.rin.enchantments.base.EnchantmentBase;
-import net.minecraft.block.Block;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -76,49 +75,40 @@ public class EnchantmentSmelter extends EnchantmentBase {
 		if(event.isSilkTouching()) return;
 		if(player.isSneaking()) return;
 		if(event.getDrops().isEmpty()) return;
-		
+
 		int level = EnchantmentHelper.getEnchantmentLevel(this, tool);
-		if(level > 0) {
-			if(tool.canHarvestBlock(event.getState()) || ForgeHooks.isToolEffective(player.world, event.getPos(), tool)) {
-				List<ItemStack> drops = new ArrayList<>();
-				for(ItemStack origDrop : event.getDrops()) {
-					if(origDrop.isEmpty()) continue;
-					
-					int origAmount = origDrop.getCount();
-					ItemStack smeltResult = FurnaceRecipes.instance().getSmeltingResult(new ItemStack(origDrop.getItem(), 1, origDrop.getMetadata()));
-					if(smeltResult.isEmpty()) {
-						//If theres no smelting, drop unsmelted item
-						if(event.getWorld().rand.nextFloat() <= event.getDropChance()) {
-							drops.add(origDrop);
-						}
-						continue;
-					}
-					
-					int levelFortune = event.getFortuneLevel();
-					if(levelFortune > 0 && !(smeltResult.getItem() instanceof ItemBlock)) {
-						//Fortune based on amount of original drops
-						origAmount *= 1 + player.getRNG().nextInt(levelFortune + 1);
-					}
-					//Account for if something smelts into multiple items
-					int dropAmount = origAmount * smeltResult.getCount();
-					
-					while(dropAmount > 0) {
-						//Account for returning more than the stack size of the smelted item
-						int toDrop = Math.min(dropAmount, smeltResult.getMaxStackSize());
-						dropAmount -= toDrop;
-						ItemStack dropStack = new ItemStack(smeltResult.getItem(), toDrop, smeltResult.getMetadata());
-						if(event.getWorld().rand.nextFloat() <= event.getDropChance()) {
-							event.getWorld().spawnParticle(EnumParticleTypes.FLAME, event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), 0, 0, 0);
-							drops.add(dropStack);
-						}
-					}
-				}
-				for(ItemStack drop : drops) {
-					Block.spawnAsEntity(event.getWorld(), event.getPos(), drop);
-				}
-				event.setDropChance(0);
-				event.getDrops().clear();
+		if (level <= 0) return;
+		if (!tool.canHarvestBlock(event.getState()) && !ForgeHooks.isToolEffective(player.world, event.getPos(), tool)) return;
+		List<ItemStack> drops = new ArrayList<>();
+		for (ItemStack origDrop : event.getDrops()) {
+			if (origDrop.isEmpty()) continue;
+
+			int origAmount = origDrop.getCount();
+			ItemStack smeltResult = FurnaceRecipes.instance().getSmeltingResult(new ItemStack(origDrop.getItem(), 1, origDrop.getMetadata()));
+			if (smeltResult.isEmpty()) {
+				//If theres no smelting, drop unsmelted item
+				drops.add(origDrop);
+				continue;
+			}
+
+			int levelFortune = event.getFortuneLevel();
+			if (levelFortune > 0 && !(smeltResult.getItem() instanceof ItemBlock)) {
+				//Fortune based on amount of original drops
+				origAmount *= 1 + player.getRNG().nextInt(levelFortune + 1);
+			}
+			//Account for if something smelts into multiple items
+			int dropAmount = origAmount * smeltResult.getCount();
+
+			while (dropAmount > 0) {
+				//Account for returning more than the stack size of the smelted item
+				int toDrop = Math.min(dropAmount, smeltResult.getMaxStackSize());
+				dropAmount -= toDrop;
+				drops.add(new ItemStack(smeltResult.getItem(), toDrop, smeltResult.getMetadata()));
+				event.getWorld().spawnParticle(EnumParticleTypes.FLAME, event.getPos().getX(), event.getPos().getY(), event.getPos().getZ(), 0, 0, 0);
 			}
 		}
+		//Replace original drops with potentially smelted drops
+		event.getDrops().clear();
+		event.getDrops().addAll(drops);
 	}
 }
