@@ -52,14 +52,15 @@ public class SoManyEnchantments {
 		if(CompatUtil.isSocketedLoaded())
 			SocketedCompat.registerLapisGem();
 		*/
-		
-		UpgradeRecipe.initUpgradeRecipes();
+
 	}
 	
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent fEvent) {
 		PotionUtil.initializePotionLists();
 		EnchantmentRegistry.initIncompatLists();
+
+		UpgradeRecipe.initUpgradeRecipes();
 		if(Loader.isModLoaded("crafttweaker"))
 			CraftTweakerCompat.applyActions();
 	}
