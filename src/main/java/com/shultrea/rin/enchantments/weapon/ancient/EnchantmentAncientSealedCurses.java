@@ -58,12 +58,7 @@ public class EnchantmentAncientSealedCurses extends EnchantmentBase {
 	public boolean isTreasureEnchantment() {
 		return ModConfig.treasure.ancientSealedCurses;
 	}
-	
-	@Override
-	public boolean isAllowedOnBooks() {
-		return false;
-	}
-	
+
 	@Override
 	public String getPrefix() {
 		return TextFormatting.YELLOW.toString();

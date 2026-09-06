@@ -64,12 +64,7 @@ public class EnchantmentAncientSwordMastery extends EnchantmentBase {
 	public boolean isTreasureEnchantment() {
 		return ModConfig.treasure.ancientSwordMastery;
 	}
-	
-	@Override
-	public boolean isAllowedOnBooks() {
-		return false;
-	}
-	
+
 	@Override
 	public String getPrefix() {
 		return TextFormatting.YELLOW.toString();
