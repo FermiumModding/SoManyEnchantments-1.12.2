@@ -82,13 +82,15 @@ public class EnchantmentDisarmament extends EnchantmentBase {
 			if(attacker.getRNG().nextFloat() < 0.02F * (float)level) {
 				if(!victim.getHeldItemMainhand().isEmpty()) {
 					if(victim instanceof EntityLiving && attacker.getRNG().nextFloat() >= ((IEntityLivingMixin)victim).getInventoryHandsDropChances()[0]) return;
-					victim.entityDropItem(victim.getHeldItemMainhand(), 0.5F);
+					ItemStack heldItem = victim.getHeldItemMainhand();
 					victim.setHeldItem(EnumHand.MAIN_HAND, ItemStack.EMPTY);
+					victim.entityDropItem(heldItem, 0.5F);
 				}
 				else if(!victim.getHeldItemOffhand().isEmpty()) {
 					if(victim instanceof EntityLiving && attacker.getRNG().nextFloat() >= ((IEntityLivingMixin)victim).getInventoryHandsDropChances()[1]) return;
-					victim.entityDropItem(victim.getHeldItemOffhand(), 0.5F);
+					ItemStack heldItem = victim.getHeldItemOffhand();
 					victim.setHeldItem(EnumHand.OFF_HAND, ItemStack.EMPTY);
+					victim.entityDropItem(heldItem, 0.5F);
 				}
 			}
 		}
