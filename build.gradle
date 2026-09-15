@@ -3,12 +3,13 @@ plugins {
     id 'idea'
     id 'net.minecraftforge.gradle' version "${forge_gradle_version}"
     id 'org.spongepowered.mixin' version "${mixin_gradle_version}"
+    id 'wtf.gofancy.fancygradle' version "${fancy_gradle_version}"
     id 'com.github.johnrengelman.shadow' version "${shadow_gradle_version}"
 }
 
 version = mod_version
 group = "com.shultrea.rin"
-archivesBaseName = mod_name
+base.archivesName = mod_name
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(8)
 
@@ -43,8 +44,6 @@ minecraft {
     }
 }
 
-sourceSets.main.resources { srcDir 'src/generated/resources' }
-
 repositories {
     flatDir { dirs 'libs' }
     maven { url = 'https://www.cursemaven.com' }
@@ -68,7 +67,7 @@ dependencies {
     compileOnly fg.deobf("curse.maven:scalinghealth-${scalinghealth_version}")
     compileOnly fg.deobf("curse.maven:lycanitesmobs-${lycanites_version}")
     compileOnly fg.deobf("curse.maven:spartanweaponry-${spartanweaponry_version}")
-    compileOnly fg.deobf("curse.maven:bettersurvival-${bettersurvival_version}")
+    implementation fg.deobf("curse.maven:bettersurvival-${bettersurvival_version}")
     compileOnly fg.deobf("curse.maven:spawnercontrol-${spawnercontrol_version}")
     compileOnly fg.deobf("curse.maven:jei-${jei_version}")
     compileOnly fg.deobf("curse.maven:infernalmobs-${infernalmobs_version}")
@@ -82,6 +81,15 @@ dependencies {
 
 mixin {
     add sourceSets.main, "mixins.${mod_id}.refmap.json"
+}
+
+fancyGradle {
+    patches {
+        resources
+        coremods
+        asm
+        mergetool
+    }
 }
 
 processResources {
@@ -128,7 +136,7 @@ jar {
                 'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
                 'FMLCorePlugin': mixin_loader_class,
                 'FMLCorePluginContainsFMLMod': 'true',
-                'ForceLoadAsMod': 'true',
+                'ForceLoadAsMod': gradle.startParameter.taskNames[0] != 'runClient' && gradle.startParameter.taskNames[0] != 'runServer',
                 'TweakClass': 'org.spongepowered.asm.launch.MixinTweaker'
         ])
     }
@@ -136,5 +144,4 @@ jar {
     archiveClassifier.set('1.12.2-THIN')
 }
 
-build.dependsOn(shadowJar)
-jar.finalizedBy('reobfJar')
+shadowJar.finalizedBy('reobfShadowJar')
