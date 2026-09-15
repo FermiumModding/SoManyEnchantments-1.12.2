@@ -61,7 +61,7 @@ Last change: May 25 2026, unfinished
 
 #### armor - thorns (mutually exclusive)
 
-* Adv Thorns - changed dura dmg from 4-10 or 2-4 if no block to 4 - 4+lvl or 2 - 2+lvl if no block, removed different dmg scaling for adv thorns 5+
+* Adv Thorns - changed dura dmg from 4-10 (or 2-4 if no block) to 4 - 4+lvl (or 2 - 2+lvl if no block), removed different dmg scaling for adv thorns 5+
 * Burn Thorns - fixed not taking dura dmg (more exactly: only if another piece had normal thorns)
 
 #### armor - other
@@ -93,7 +93,7 @@ Last change: May 25 2026, unfinished
 * C.o. Holding - removed additional luck attribute modifier of -100% * lvl @op1
 * C.o. Inacc - unchanged, moved arrow handling to mixin to simplify
 * C.o. Poss
-* C.o. Vuln - incompat with Combat Medic, Str Vit
+* C.o. Vuln - now counts up all C.o.V. lvls on all armor pieces instead of taking max lvl of all pieces, with +20% dmg per such lvl instead of +40% per old max lvl, now incompat with Combat Medic, Str Vit
 * Dragging - now a curse, fixed potential crash if lvl >5
 * Extinguish - new
 * Heavy Weight - incompat with Swifter Slashes, Evasion, Light Weight
@@ -127,7 +127,7 @@ Last change: May 25 2026, unfinished
 
 * Burn Shield
 * Emp Def
-* Nat Block - Natural Blocking now triggers before armor calc (so it also reduces durability damage on armor), but got nerfed to max 20% DR
+* Nat Block - now triggers before armor calc (so also reduces durability damage on armor), but nerfed to 10%/20% DR (was 20%/30%). simplified dura dmg to 1+1.5*blockedDmg, was 1+1.75*blockedDmg (1+1.25*blockedDmg if ench lvl >=3)
 
 #### tool
 
