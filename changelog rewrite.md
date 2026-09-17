@@ -143,7 +143,7 @@ Last change: May 25 2026, unfinished
 #### weapon - conditionaldamage (mutually exclusive)
 
 * Dark Shadows - Increased dmg (+1+2.5*lvl, was +0.75*lvl), simplified conditions, only attacker needs to be in darkness, added scaling to blindness chance (10%/20%/30%, was 10%)
-* Mortalitas - way more compatible now. made added dmg decay slowly over time (1 kill per minute)
+* Mortalitas - more compatible with other enchantments now, was incompat with damagemulti group for no reason
 * Viper - Fixed Viper adding 1 dmg flat at any lvl
 
 #### weapon - crits (mutually exclusive)
