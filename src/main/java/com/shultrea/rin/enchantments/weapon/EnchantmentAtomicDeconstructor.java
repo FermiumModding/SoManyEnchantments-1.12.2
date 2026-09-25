@@ -10,6 +10,7 @@ import com.shultrea.rin.util.compat.CompatUtil;
 import com.shultrea.rin.util.compat.RLCombatCompat;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundCategory;
@@ -75,7 +76,7 @@ public class EnchantmentAtomicDeconstructor extends EnchantmentBase {
 		if(attacker == null) return;
 		if(attacker.world.isRemote) return;
 		EntityLivingBase victim = event.getEntityLiving();
-		if(victim == null) return;
+		if(victim == null || victim instanceof EntityPlayer) return;
 		ItemStack stack = attacker.getHeldItemMainhand();
 		if(stack.isEmpty()) return;
 		
