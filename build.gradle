@@ -151,7 +151,7 @@ shadowJar.finalizedBy('reobfShadowJar')
 
 
 publishMods {
-    file = jar.archiveFile
+    file = shadowJar.archiveFile
     changelog = providers.environmentVariable("CHANGELOG").orElse("")
     version = mod_version
     type = STABLE
