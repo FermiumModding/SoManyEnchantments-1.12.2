@@ -5,6 +5,7 @@ plugins {
     id 'org.spongepowered.mixin' version "${mixin_gradle_version}"
     id 'wtf.gofancy.fancygradle' version "${fancy_gradle_version}"
     id 'com.github.johnrengelman.shadow' version "${shadow_gradle_version}"
+    id 'me.modmuss50.mod-publish-plugin' version "${mod_publish_gradle_version}"
 }
 
 version = mod_version
@@ -147,3 +148,26 @@ jar {
 }
 
 shadowJar.finalizedBy('reobfShadowJar')
+
+
+publishMods {
+    file = jar.archiveFile
+    changelog = providers.environmentVariable("CHANGELOG").orElse("")
+    version = mod_version
+    type = STABLE
+    modLoaders.add("forge")
+
+    if (project.findProperty("curseforge_project_id")) {
+        curseforge {
+            accessToken = providers.environmentVariable("CURSEFORGE_TOKEN")
+            projectId = project.findProperty("curseforge_project_id")
+            minecraftVersions.add(minecraft_version)
+            modLoaders.add("forge")
+
+            client = true
+            server = true
+
+            requires("fermiumbooter")
+        }
+    }
+}
